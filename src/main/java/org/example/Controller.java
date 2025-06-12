@@ -50,13 +50,13 @@ public class Controller {
         int status = scan.nextInt();
        while(true){
            if(status==1){
-               taskStatus = "Запланировано";
+               taskStatus = EnumStatus.PLANNED.name();
                break;
            } else if(status==2){
-               taskStatus = "В процессе";
+               taskStatus = EnumStatus.IN_PROGRESS.name();
                break;
            } else if(status==3){
-               taskStatus = "Завершено";
+               taskStatus = EnumStatus.READY.name();
                break;
            }else {
                System.out.println("Не верно");
@@ -79,49 +79,43 @@ public class Controller {
         System.out.println("Введите номер задачи:");
         scan.nextLine();
         int number = scan.nextInt();
+
         System.out.println("Что вы хотите изменить?"+'\n'+"1.Название."+'\n'+"2.Описание."+'\n'+"3.Статус.");
         int choice = scan.nextInt();
-        while(true) {
             if (choice == 1) {
                 System.out.println("Введите новое имя задачи: ");
                 scan.nextLine();
                 String newName = scan.nextLine();
                 taskList.taskList.get(number).setTaskName(newName);
                 System.out.println("Успешно");
-                mainMenu();
             } else if (choice == 2) {
                 System.out.println("Введите новое описание:");
                 scan.nextLine();
                 String newDescription = scan.nextLine();
                 taskList.taskList.get(number).setTaskDescription(newDescription);
                 System.out.println("Успешно");
-                mainMenu();
             } else if (choice == 3) {
                 System.out.println("Установите новый статус(пжлст):" + '\n' + "1.Запланировано." + '\n' + "2.В процессе." + '\n' + "3.Завершено.");
                 String taskStatus = "";
                 scan.nextLine();
                 int status = scan.nextInt();
-                while (true) {
                     if (status == 1) {
-                        taskStatus = "Запланировано";
-                        break;
+                        taskStatus = EnumStatus.PLANNED.name();
                     } else if (status == 2) {
-                        taskStatus = "В процессе";
-                        break;
+                        taskStatus = EnumStatus.IN_PROGRESS.name();
                     } else if (status == 3) {
-                        taskStatus = "Завершено";
-                        break;
+                        taskStatus = EnumStatus.READY.name();
                     } else {
                         System.out.println("Не верно");
+                        changeTask();
                     }
-                }
                 taskList.taskList.get(number).setTaskStatus(taskStatus);
                 System.out.println("Успешно");
-                mainMenu();
             } else {
                 System.out.println("Нет такого варината.");
+                changeTask();
             }
-        }
+            mainMenu();
     }
     public void deleteTask(){
         if(taskList.taskList.isEmpty()){
