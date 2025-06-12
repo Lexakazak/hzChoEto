@@ -29,9 +29,7 @@ public class Controller {
         entryChoice();
     }
     public void watchTaskList(){
-        for (int i=0;i<taskList.taskList.size(); i++){
-            System.out.println(taskList.taskList.get(i));
-        }
+        System.out.println(taskList.taskList);
         System.out.println("1.Вернуться в главное меню.");
         int tmm = scan.nextInt();
         if(tmm==1){
@@ -77,9 +75,7 @@ public class Controller {
             System.out.println("Задачи не обнаружены. Возвращение в главное меню.");
             mainMenu();
         }
-        for (int i=0;i<taskList.taskList.size(); i++){
-            System.out.println(taskList.taskList.get(i));
-        }
+        System.out.println(taskList.taskList);
         System.out.println("Введите номер задачи:");
         scan.nextLine();
         int number = scan.nextInt();
@@ -132,21 +128,17 @@ public class Controller {
             System.out.println("Задачи не обнаружены. Возвращение в главное меню.");
             mainMenu();
         }
-        for (int i=0;i<taskList.taskList.size(); i++){
-            System.out.println(taskList.taskList.get(i));
-        }
-        System.out.println("Введите номер задачи, которую нужно удалить: ");
+        System.out.println(taskList.taskList);
+        System.out.println("Введите id задачи, которую нужно удалить: ");
         scan.nextLine();
         int number = scan.nextInt();
         taskList.taskList.remove(number);
-        counter--;
         System.out.println("Задача была удалена.");
         mainMenu();
     }
     public void sortTask(){
 
     }
-
     public void exit(){
         System.out.println("Всего доброго...");
     }
