@@ -73,6 +73,10 @@ public class Controller {
         mainMenu();
     }
     public void changeTask(){
+        if(taskList.taskList.isEmpty()){
+            System.out.println("Задачи не обнаружены. Возвращение в главное меню.");
+            mainMenu();
+        }
         for (int i=0;i<taskList.taskList.size(); i++){
             System.out.println(taskList.taskList.get(i));
         }
@@ -124,7 +128,20 @@ public class Controller {
         }
     }
     public void deleteTask(){
-        System.out.println("*Удаляю задачи*");
+        if(taskList.taskList.isEmpty()){
+            System.out.println("Задачи не обнаружены. Возвращение в главное меню.");
+            mainMenu();
+        }
+        for (int i=0;i<taskList.taskList.size(); i++){
+            System.out.println(taskList.taskList.get(i));
+        }
+        System.out.println("Введите номер задачи, которую нужно удалить: ");
+        scan.nextLine();
+        int number = scan.nextInt();
+        taskList.taskList.remove(number);
+        counter--;
+        System.out.println("Задача была удалена.");
+        mainMenu();
     }
     public void sortTask(){
 
