@@ -1,5 +1,10 @@
 package org.example;
 
+
+import javax.sql.rowset.Predicate;
+import java.io.IOException;
+import java.security.KeyStore;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Controller {
@@ -7,25 +12,35 @@ public class Controller {
      Scanner scan = new Scanner(System.in);
      int counter = 0;
     public void entryChoice(){
-        int fc = scan.nextInt();
-        if(fc==1){
-            watchTaskList();
-        }else if(fc==2){
-            addTask();
-        } else if(fc==3){
-            changeTask();
-        } else if(fc==4){
-            deleteTask();
-        } else if(fc==5){
-            exit();
-        } else{
-            System.out.println("Такого варианта не существует. Выберете нужную из списка:");
-            entryChoice();
-        }
+        if (scan.hasNextInt()) {
+            int fc = scan.nextInt();
+                if (fc == 1) {
+                    watchTaskList();
+                } else if (fc == 2) {
+                    addTask();
+                } else if (fc == 3) {
+                    changeTask();
+                } else if (fc == 4) {
+                    deleteTask();
+                } else if (fc == 5) {
+                    sortTask();
+                } else if (fc == 6) {
+                    filterTask();
+                } else if (fc == 7) {
+                    exit();
+                } else {
+                    System.out.println("Такого варианта не существует. Выберете нужный из списка:");
+                    entryChoice();
+                }
+            }else{
+                System.out.println("Пошел нахуй");
+                entryChoice();
+            }
     }
     public void mainMenu(){
         System.out.println("Что вы желаете сделать?"+'\n'+"1.Просмотреть список задач."
-                +'\n'+"2.Добавить задачу."+'\n'+"3.Изменить задачу."+'\n'+"4.Удалить задачу."+'\n'+"5.Выйти."+'\n'+"Введите номер раздела: ");
+                +'\n'+"2.Добавить задачу."+'\n'+"3.Изменить задачу."+'\n'+"4.Удалить задачу."+'\n'+
+                "5.Сортировать задачи по статусу."+'\n'+"6.Показать задачи в процессе."+'\n'+"7.Выйти."+'\n'+"Введите номер раздела: ");
         entryChoice();
     }
     public void watchTaskList(){
@@ -131,9 +146,17 @@ public class Controller {
         mainMenu();
     }
     public void sortTask(){
+        taskList.taskList.entrySet().stream().sorted(Map.Entry.<Integer, Task>comparingByValue().reversed())
+                .forEach(System.out::println);
+        mainMenu();
+    }
 
+    public void filterTask(){
+            taskList.taskList.entrySet().stream().filter(s -> taskList.taskList.containsValue(EnumStatus.IN_PROGRESS))
+                    .forEach(System.out::println);
     }
     public void exit(){
         System.out.println("Всего доброго...");
+        System.exit(1);
     }
 }

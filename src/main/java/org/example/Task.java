@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 @Data
-public class Task {
+public class Task implements Comparable<Task> {
     private int taskNumber;
     private String taskName;
     private String taskStatus;
@@ -20,5 +20,9 @@ public class Task {
                 ", taskDescription='" + taskDescription + '\'' +
                 '}';
     }
-
+    @Override
+    public int compareTo(Task o){
+        int result = this.taskStatus.compareTo(o.taskStatus);
+        return result;
+    }
 }
